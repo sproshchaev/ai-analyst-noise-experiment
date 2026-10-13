@@ -67,6 +67,7 @@ null tables: 100, share of p<0.05 (target about 5%)
   claim lastweek value     tests=  100 share=  4.0%
   claim pair     rate      tests=  100 share=  6.0%
   claim pair     rate2     tests=  100 share=  3.0%
+  claim spike    max       tests=  100 share=  2.0%
   sweep recent   rate      tests= 1200 share=  6.7%
   sweep recent   value     tests= 2400 share=  4.7%
   sweep segment  rate      tests= 1200 share=  4.5%

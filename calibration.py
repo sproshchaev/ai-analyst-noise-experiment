@@ -6,7 +6,7 @@
 должна быть около 5%. Доверительный интервал на 100 таблицах широкий,
 поэтому смотреть стоит на порядок: 3-8% нормально, 15% и выше - тест врёт.
 
-Для скорости перестановок здесь 499, а не 5000.
+Для скорости перестановок здесь 499, а симуляций максимума 199, а не 5000.
 
 Запуск: python3 calibration.py
 """
@@ -15,7 +15,7 @@ from collections import defaultdict
 
 from generate import make_rows
 from noise_check import run_tests
-from stats import p_lastweek, p_pair
+from stats import p_lastweek, p_pair, p_spike
 
 TABLES = 100
 FIRST_SEED = 1000
@@ -35,6 +35,8 @@ def main():
             "claim lastweek value": p_lastweek(rows, "web/new", "revenue_rub"),
             "claim pair     rate ": p_pair(rows, "ios/returning", "web/returning", "conversion_pct", rng),
             "claim pair     rate2": p_pair(rows, "web/new", "web/returning", "refunds_pct", rng),
+            # ассистент называет аномалией самую высокую ячейку таблицы
+            "claim spike    max  ": p_spike(rows, max(float(r["refunds_pct"]) for r in rows), rng, n_sim=199),
         }
         for key, p in claim_tests.items():
             total[key] += 1

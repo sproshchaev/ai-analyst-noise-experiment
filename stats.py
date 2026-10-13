@@ -146,14 +146,14 @@ def p_pair(rows, seg_a, seg_b, metric, rng):
     return (hits + 1) / (N_SIM + 1)
 
 
-def p_spike(rows, value, rng):
+def p_spike(rows, value, rng, n_sim=N_SIM):
     orders = [int(r["orders"]) for r in rows]
     rate = sum(refunds(r) for r in rows) / sum(orders)
     hits = 0
-    for _ in range(N_SIM):
+    for _ in range(n_sim):
         mx = max(100.0 * sum(1 for _ in range(n) if rng.random() < rate) / n for n in orders)
         hits += round(mx, 1) >= value
-    return (hits + 1) / (N_SIM + 1)
+    return (hits + 1) / (n_sim + 1)
 
 
 def run_test(rows, test, seg_a, seg_b, metric, week, rng):
