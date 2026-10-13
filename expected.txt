@@ -7,36 +7,36 @@ after Holm p<0.05: 0
   segment web/returning      refunds_pct     effect=    -1.56 p=0.0224
 == check_claims.py ==
 threshold (Bonferroni 0.05/90): 0.00056
-  baseline_1 finding lastweek p=0.4167 noise
-  baseline_1 finding trend    p=0.2551 noise
-  baseline_1 finding trend    p=0.6525 noise
-  baseline_1 finding trend    p=0.3883 noise
-  baseline_1 finding trend    p=0.8328 noise
-  baseline_1 finding pair     p=0.3393 noise
-  baseline_1 finding spike    p=0.1212 noise
-  baseline_1 finding spike    p=0.6501 noise
-  baseline_2 finding lastweek p=0.4167 noise
-  baseline_2 finding trend    p=0.2551 noise
-  baseline_2 finding trend    p=0.5989 noise
-  baseline_2 finding pair     p=0.0136 noise
-  baseline_2 finding spike    p=0.1212 noise
-  baseline_2 finding spike    p=0.6501 noise
-  baseline_3 finding lastweek p=0.2500 noise
-  baseline_3 finding lastweek p=0.1667 noise
-  baseline_3 finding spike    p=0.6501 noise
-  baseline_3 finding pair     p=0.3393 noise
-  baseline_3 finding lastweek p=0.2500 noise
-  baseline_3 finding spike    p=0.1212 noise
-  skeptic_1  signal  pair     p=0.0136 noise
-  skeptic_1  signal  pair     p=0.0204 noise
-  skeptic_1  signal  spike    p=0.1212 noise
-  skeptic_2  signal  pair     p=0.0136 noise
-  skeptic_2  signal  spike    p=0.1212 noise
-  skeptic_2  signal  spike    p=0.6501 noise
-  skeptic_2  signal  lastweek p=0.1667 noise
-  skeptic_3  signal  pair     p=0.0136 noise
-  skeptic_3  signal  lastweek p=0.1667 noise
-  skeptic_3  signal  spike    p=0.1212 noise
+  baseline_1 lastweek all                            revenue_rub     p=0.2919 noise
+  baseline_1 trend    web/new                        revenue_rub     p=0.2551 noise
+  baseline_1 trend    ios/new                        revenue_rub     p=0.6525 noise
+  baseline_1 trend    web/returning                  revenue_rub     p=0.3883 noise
+  baseline_1 trend    web/returning                  conversion_pct  p=0.8154 noise
+  baseline_1 pair     ios/returning vs ios/new       conversion_pct  p=0.1621 noise
+  baseline_1 spike    ios/new                        refunds_pct     p=0.1272 noise
+  baseline_1 spike    android/new                    refunds_pct     p=0.6657 noise
+  baseline_2 lastweek all                            revenue_rub     p=0.2919 noise
+  baseline_2 trend    web/new                        revenue_rub     p=0.2551 noise
+  baseline_2 trend    ios/new                        conversion_pct  p=0.5483 noise
+  baseline_2 pair     ios/returning vs web/returning conversion_pct  p=0.0117 noise
+  baseline_2 spike    ios/new                        refunds_pct     p=0.1272 noise
+  baseline_2 spike    android/new                    refunds_pct     p=0.6657 noise
+  baseline_3 lastweek web/new                        revenue_rub     p=0.1580 noise
+  baseline_3 lastweek ios/new                        conversion_pct  p=0.0334 noise
+  baseline_3 spike    android/new                    refunds_pct     p=0.6657 noise
+  baseline_3 pair     ios/returning vs ios/new       conversion_pct  p=0.1621 noise
+  baseline_3 lastweek web/returning                  conversion_pct  p=0.2916 noise
+  baseline_3 spike    ios/new                        refunds_pct     p=0.1272 noise
+  skeptic_1  pair     ios/returning vs web/returning conversion_pct  p=0.0117 noise
+  skeptic_1  pair     web/new vs web/returning       refunds_pct     p=0.0140 noise
+  skeptic_1  spike    ios/new                        refunds_pct     p=0.1272 noise
+  skeptic_2  pair     ios/returning vs web/returning conversion_pct  p=0.0117 noise
+  skeptic_2  spike    ios/new                        refunds_pct     p=0.1272 noise
+  skeptic_2  spike    android/new                    refunds_pct     p=0.6657 noise
+  skeptic_2  lastweek ios/new                        conversion_pct  p=0.0334 noise
+  skeptic_3  pair     ios/returning vs web/returning conversion_pct  p=0.0117 noise
+  skeptic_3  lastweek ios/new                        conversion_pct  p=0.0334 noise
+  skeptic_3  spike    ios/new                        refunds_pct     p=0.1272 noise
 summary:
   baseline_1 claims=8 survived=0
   baseline_2 claims=6 survived=0
@@ -44,3 +44,11 @@ summary:
   skeptic_1  claims=3 survived=0
   skeptic_2  claims=4 survived=0
   skeptic_3  claims=3 survived=0
+  total      claims=30 survived=0
+== power_check.py ==
+threshold (Bonferroni 0.05/90): 0.00056
+  lastweek ios/new        conversion_pct  p=0.000001 CAUGHT
+  pair     ios/returning  conversion_pct  p=0.000000 CAUGHT
+  trend    android/new    sessions        p=0.000200 CAUGHT
+  spike    ios/new        refunds_pct     p=0.000200 CAUGHT
+caught 4 of 4 planted effects
