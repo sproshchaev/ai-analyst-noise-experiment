@@ -18,6 +18,8 @@ fi
   python3 noise_check.py data/weekly_metrics.csv
   echo "== check_claims.py =="
   python3 check_claims.py
+  echo "== linear_trend.py =="
+  python3 linear_trend.py
   echo "== power_check.py =="
   python3 power_check.py
 } > "$tmp/actual.txt"

@@ -45,6 +45,14 @@ summary:
   skeptic_2  claims=4 survived=0
   skeptic_3  claims=3 survived=0
   total      claims=30 survived=0
+== linear_trend.py ==
+  all                slope=-0.0007 p.p./week p=0.903
+  android/new        slope=+0.0133 p.p./week p=0.537
+  android/returning  slope=+0.0054 p.p./week p=0.855
+  ios/new            slope=-0.0277 p.p./week p=0.376
+  ios/returning      slope=+0.0099 p.p./week p=0.647
+  web/new            slope=-0.0037 p.p./week p=0.766
+  web/returning      slope=-0.0019 p.p./week p=0.921
 == power_check.py ==
 threshold (Bonferroni 0.05/90): 0.00056
   lastweek ios/new        conversion_pct  p=0.000001 CAUGHT
