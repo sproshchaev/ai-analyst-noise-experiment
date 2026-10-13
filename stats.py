@@ -15,7 +15,40 @@
 import math
 import random
 
-from noise_check import corr, ranks
+
+def ranks(xs):
+    order = sorted(range(len(xs)), key=lambda i: xs[i])
+    r = [0.0] * len(xs)
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and xs[order[j + 1]] == xs[order[i]]:
+            j += 1
+        for k in range(i, j + 1):
+            r[order[k]] = (i + j) / 2.0
+        i = j + 1
+    return r
+
+
+def corr(a, b):
+    n = len(a)
+    ma, mb = sum(a) / n, sum(b) / n
+    cov = sum((x - ma) * (y - mb) for x, y in zip(a, b))
+    va = sum((x - ma) ** 2 for x in a) ** 0.5
+    vb = sum((y - mb) ** 2 for y in b) ** 0.5
+    return cov / (va * vb) if va and vb else 0.0
+
+
+def holm(pvals):
+    m = len(pvals)
+    idx = sorted(range(m), key=lambda i: pvals[i])
+    adj = [0.0] * m
+    running = 0.0
+    for rank, i in enumerate(idx):
+        running = max(running, min(1.0, (m - rank) * pvals[i]))
+        adj[i] = running
+    return adj
+
 
 N_SIM = 5000
 RATES = {

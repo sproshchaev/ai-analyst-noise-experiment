@@ -34,9 +34,9 @@ def planted_rows():
             if seg == "ios/returning":
                 p_order = 0.037
             p_refund = 0.25 if (seg == "ios/new" and week == 11) else g.P_REFUND
-            sessions = g.poisson(rng, traffic)
+            sessions = g.normal_approx_poisson(rng, traffic)
             orders = g.binomial(rng, sessions, p_order)
-            checks = [max(300.0, rng.gauss(g.CHECK_MEAN, g.CHECK_SD)) for _ in range(orders)]
+            checks = [max(300.0, rng.gauss(g.CHECK_LOCATION, g.CHECK_SD)) for _ in range(orders)]
             revenue = round(sum(checks))
             refunds = g.binomial(rng, orders, p_refund)
             rows.append({

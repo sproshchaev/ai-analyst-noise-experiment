@@ -21,13 +21,15 @@ SEGMENTS = {
     "android/returning": 3500,
 }
 P_ORDER = 0.031        # вероятность заказа на сессию, у всех одна
-CHECK_MEAN = 3200.0    # среднее нормального распределения чека до отсечения снизу на 300 руб.;
+CHECK_LOCATION = 3200.0    # среднее нормального распределения чека до отсечения снизу на 300 руб.;
                        # после отсечения матожидание около 3 252 руб.
 CHECK_SD = 1900.0      # разброс чека одного заказа
 P_REFUND = 0.06        # доля возвратов
+HEADER = ["week", "segment", "sessions", "orders", "conversion_pct",
+          "avg_check_rub", "revenue_rub", "refunds_pct"]
 
 
-def poisson(rng, lam):
+def normal_approx_poisson(rng, lam):
     # не выборка из распределения Пуассона, а его нормальное приближение:
     # для lam в тысячах разница несущественна
     return max(0, round(rng.gauss(lam, lam ** 0.5)))
@@ -37,20 +39,30 @@ def binomial(rng, n, p):
     return sum(1 for _ in range(n) if rng.random() < p)
 
 
-def main():
-    rng = random.Random(SEED)
-    print("week,segment,sessions,orders,conversion_pct,avg_check_rub,revenue_rub,refunds_pct")
+def make_rows(seed=SEED):
+    rng = random.Random(seed)
+    rows = []
     for week in range(1, WEEKS + 1):
         for seg, traffic in SEGMENTS.items():
-            sessions = poisson(rng, traffic)
+            sessions = normal_approx_poisson(rng, traffic)
             orders = binomial(rng, sessions, P_ORDER)
-            checks = [max(300.0, rng.gauss(CHECK_MEAN, CHECK_SD)) for _ in range(orders)]
+            checks = [max(300.0, rng.gauss(CHECK_LOCATION, CHECK_SD)) for _ in range(orders)]
             revenue = round(sum(checks))
             avg_check = round(revenue / orders) if orders else 0
             refunds = binomial(rng, orders, P_REFUND)
             conv = round(100.0 * orders / sessions, 2) if sessions else 0.0
             ref_pct = round(100.0 * refunds / orders, 1) if orders else 0.0
-            print(f"{week},{seg},{sessions},{orders},{conv},{avg_check},{revenue},{ref_pct}")
+            rows.append({"week": str(week), "segment": seg, "sessions": str(sessions),
+                         "orders": str(orders), "conversion_pct": str(conv),
+                         "avg_check_rub": str(avg_check), "revenue_rub": str(revenue),
+                         "refunds_pct": str(ref_pct)})
+    return rows
+
+
+def main():
+    print(",".join(HEADER))
+    for r in make_rows():
+        print(",".join(r[h] for h in HEADER))
 
 
 if __name__ == "__main__":

@@ -22,6 +22,8 @@ fi
   python3 linear_trend.py
   echo "== power_check.py =="
   python3 power_check.py
+  echo "== calibration.py =="
+  python3 calibration.py
 } > "$tmp/actual.txt"
 
 if diff -u expected.txt "$tmp/actual.txt"; then

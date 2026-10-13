@@ -1,10 +1,11 @@
 == noise_check.py ==
 tests: 90
-raw p<0.05: 2
+raw p<0.05: 3
 expected by chance: 4.5
 after Holm p<0.05: 0
-  segment ios/returning      conversion_pct  effect=     0.19 p=0.0218
-  segment web/returning      refunds_pct     effect=    -1.56 p=0.0224
+  segment web/returning      refunds_pct     effect=    -1.53 p=0.0078
+  segment ios/returning      conversion_pct  effect=     0.19 p=0.0151
+  recent  web/returning      avg_check_rub   effect=   134.62 p=0.0498
 == check_claims.py ==
 threshold (Bonferroni 0.05/90): 0.00056
   baseline_1 lastweek all                            revenue_rub     p=0.2919 noise
@@ -60,3 +61,15 @@ threshold (Bonferroni 0.05/90): 0.00056
   trend    android/new    sessions        p=0.000200 CAUGHT
   spike    ios/new        refunds_pct     p=0.000200 CAUGHT
 caught 4 of 4 planted effects
+== calibration.py ==
+null tables: 100, share of p<0.05 (target about 5%)
+  claim lastweek rate      tests=  100 share=  6.0%
+  claim lastweek value     tests=  100 share=  4.0%
+  claim pair     rate      tests=  100 share=  6.0%
+  claim pair     rate2     tests=  100 share=  3.0%
+  sweep recent   rate      tests= 1200 share=  6.7%
+  sweep recent   value     tests= 2400 share=  4.7%
+  sweep segment  rate      tests= 1200 share=  4.5%
+  sweep segment  value     tests=  600 share=  4.0%
+  sweep trend    rate      tests= 1200 share=  4.4%
+  sweep trend    value     tests= 2400 share=  5.2%
