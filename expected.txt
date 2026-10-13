@@ -1,0 +1,46 @@
+== noise_check.py ==
+tests: 90
+raw p<0.05: 2
+expected by chance: 4.5
+after Holm p<0.05: 0
+  segment ios/returning      conversion_pct  effect=     0.19 p=0.0218
+  segment web/returning      refunds_pct     effect=    -1.56 p=0.0224
+== check_claims.py ==
+threshold (Bonferroni 0.05/90): 0.00056
+  baseline_1 finding lastweek p=0.4167 noise
+  baseline_1 finding trend    p=0.2551 noise
+  baseline_1 finding trend    p=0.6525 noise
+  baseline_1 finding trend    p=0.3883 noise
+  baseline_1 finding trend    p=0.8328 noise
+  baseline_1 finding pair     p=0.3393 noise
+  baseline_1 finding spike    p=0.1212 noise
+  baseline_1 finding spike    p=0.6501 noise
+  baseline_2 finding lastweek p=0.4167 noise
+  baseline_2 finding trend    p=0.2551 noise
+  baseline_2 finding trend    p=0.5989 noise
+  baseline_2 finding pair     p=0.0136 noise
+  baseline_2 finding spike    p=0.1212 noise
+  baseline_2 finding spike    p=0.6501 noise
+  baseline_3 finding lastweek p=0.2500 noise
+  baseline_3 finding lastweek p=0.1667 noise
+  baseline_3 finding spike    p=0.6501 noise
+  baseline_3 finding pair     p=0.3393 noise
+  baseline_3 finding lastweek p=0.2500 noise
+  baseline_3 finding spike    p=0.1212 noise
+  skeptic_1  signal  pair     p=0.0136 noise
+  skeptic_1  signal  pair     p=0.0204 noise
+  skeptic_1  signal  spike    p=0.1212 noise
+  skeptic_2  signal  pair     p=0.0136 noise
+  skeptic_2  signal  spike    p=0.1212 noise
+  skeptic_2  signal  spike    p=0.6501 noise
+  skeptic_2  signal  lastweek p=0.1667 noise
+  skeptic_3  signal  pair     p=0.0136 noise
+  skeptic_3  signal  lastweek p=0.1667 noise
+  skeptic_3  signal  spike    p=0.1212 noise
+summary:
+  baseline_1 claims=8 survived=0
+  baseline_2 claims=6 survived=0
+  baseline_3 claims=6 survived=0
+  skeptic_1  claims=3 survived=0
+  skeptic_2  claims=4 survived=0
+  skeptic_3  claims=3 survived=0

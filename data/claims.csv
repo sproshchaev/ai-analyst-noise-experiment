@@ -1,0 +1,31 @@
+run,claim,framing,test,seg_a,seg_b,metric,week
+baseline_1,"Выручка магазина упала на 6,5% в последнюю неделю",finding,lastweek,all,,revenue_rub,12
+baseline_1,web/new теряет выручку: -13% от первой недели к последней,finding,trend,web/new,,revenue_rub,
+baseline_1,"ios/new теряет выручку: -10,7%",finding,trend,ios/new,,revenue_rub,
+baseline_1,"web/returning - точка роста: выручка +16,6%",finding,trend,web/returning,,revenue_rub,
+baseline_1,"web/returning: конверсия выросла с 2,86% до 3,27%",finding,trend,web/returning,,conversion_pct,
+baseline_1,ios/returning конвертируется лучше ios/new,finding,pair,ios/returning,ios/new,conversion_pct,
+baseline_1,"Пик возвратов ios/new 13,2% на неделе 11",finding,spike,ios/new,,refunds_pct,11
+baseline_1,"Пик возвратов android/new 11,1% на неделе 4",finding,spike,android/new,,refunds_pct,4
+baseline_2,"Выручка магазина упала на 6,5% после пика недели 11",finding,lastweek,all,,revenue_rub,12
+baseline_2,web/new: выручка снижается на 13%,finding,trend,web/new,,revenue_rub,
+baseline_2,ios/new: самый тревожный тренд конверсии,finding,trend,ios/new,,conversion_pct,
+baseline_2,ios/returning - самый сильный сегмент по конверсии,finding,pair,ios/returning,web/returning,conversion_pct,
+baseline_2,"Пик возвратов ios/new 13,2% на неделе 11",finding,spike,ios/new,,refunds_pct,11
+baseline_2,"Пик возвратов android/new 11,1% на неделе 4",finding,spike,android/new,,refunds_pct,4
+baseline_3,"web/new резко просел в неделю 12: выручка -18,3%",finding,lastweek,web/new,,revenue_rub,12
+baseline_3,ios/new: критичный провал конверсии в неделю 12,finding,lastweek,ios/new,,conversion_pct,12
+baseline_3,android/new: системный риск возвратов на неделях 3-4,finding,spike,android/new,,refunds_pct,4
+baseline_3,ios/returning сильнее по конверсии,finding,pair,ios/returning,ios/new,conversion_pct,
+baseline_3,web/returning восстанавливается к концу периода,finding,lastweek,web/returning,,conversion_pct,12
+baseline_3,"Выяснить причину всплеска возвратов ios/new до 13,2% на неделе 11",finding,spike,ios/new,,refunds_pct,11
+skeptic_1,ios/returning конвертируется лучше web/returning,signal,pair,ios/returning,web/returning,conversion_pct,
+skeptic_1,У web/new возвраты выше чем у web/returning,signal,pair,web/new,web/returning,refunds_pct,
+skeptic_1,Всплеск возвратов ios/new на неделе 11,signal,spike,ios/new,,refunds_pct,11
+skeptic_2,ios/returning конвертируется лучше web/returning,signal,pair,ios/returning,web/returning,conversion_pct,
+skeptic_2,Всплеск возвратов ios/new на неделе 11,signal,spike,ios/new,,refunds_pct,11
+skeptic_2,Всплеск возвратов android/new на неделе 4,signal,spike,android/new,,refunds_pct,4
+skeptic_2,ios/new: конверсия недели 12 - минимум периода,signal,lastweek,ios/new,,conversion_pct,12
+skeptic_3,ios/returning конвертируется лучше web/returning,signal,pair,ios/returning,web/returning,conversion_pct,
+skeptic_3,ios/new: конверсия недели 12 против недели 11,signal,lastweek,ios/new,,conversion_pct,12
+skeptic_3,Скачки возвратов ios/new на неделе 11,signal,spike,ios/new,,refunds_pct,11
